@@ -144,16 +144,16 @@ export default function Footer() {
                   href={`https://wa.me/${whatsappNumber}`}
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  +62 812-3456-7890
+                  +62 895-4022-61536
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-sm">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                 <a
-                  href="mailto:info@sundabalitour.com"
+                  href="mailto:sundabalitour@gmail.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  info@sundabalitour.com
+                  sundabalitour@gmail.com
                 </a>
               </li>
             </ul>

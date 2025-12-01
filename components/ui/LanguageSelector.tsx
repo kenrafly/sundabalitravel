@@ -84,7 +84,7 @@ export default function LanguageSelector() {
   }, [isOpen]);
 
   const handleLanguageChange = (code: string) => {
-    setLanguage(code);
+    setLanguage(code as "en" | "id");
     setIsOpen(false);
     setSearchQuery("");
   };

@@ -9,6 +9,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import StructuredData from "@/components/StructuredData";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import ClientWrapper from "@/components/providers/ClientWrapper";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const cormorant = Cormorant_Garamond({
@@ -65,15 +66,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SmoothScrollProvider>
-            <ScrollProgress />
-            <CustomCursor />
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-            <WhatsAppFAB />
-            <LanguageFAB />
-          </SmoothScrollProvider>
+          <ScrollProgress />
+          <CustomCursor />
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <WhatsAppFAB />
+          <LanguageFAB />
         </ThemeProvider>
       </body>
     </html>

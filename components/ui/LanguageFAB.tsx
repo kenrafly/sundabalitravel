@@ -86,7 +86,7 @@ export default function LanguageFAB() {
   }, [isOpen]);
 
   const handleLanguageSelect = async (code: string) => {
-    setLanguage(code);
+    setLanguage(code as "en" | "id");
     setIsOpen(false);
     setSearchQuery("");
 

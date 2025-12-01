@@ -32,7 +32,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const whatsappNumber = "+6281234567890"; // Replace with actual number
+  const whatsappNumber = "+6289540226153";
 
   return (
     <motion.nav
