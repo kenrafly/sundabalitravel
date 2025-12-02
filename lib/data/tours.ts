@@ -226,27 +226,27 @@ export const tourPackages: TourPackage[] = [
 export const featuredDestinations = [
   {
     name: "Ubud",
-    description: "Cultural heart of Bali",
+    description: "Cultural heart and artistic soul of Bali",
     image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&auto=format&fit=crop&q=80",
   },
   {
-    name: "Uluwatu",
-    description: "Clifftop temples & beaches",
+    name: "North Bali",
+    description: "Serene waterfalls, temples & natural beauty",
     image:
-      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&auto=format&fit=crop&q=80",
   },
   {
-    name: "Nusa Penida",
-    description: "Paradise island escape",
+    name: "South Bali",
+    description: "Stunning beaches, surf spots & clifftop views",
     image:
-      "https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1200&auto=format&fit=crop&q=80",
   },
   {
-    name: "Mount Batur",
-    description: "Sunrise volcano trek",
+    name: "East Bali",
+    description: "Ancient temples, rice terraces & volcanic landscapes",
     image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&auto=format&fit=crop&q=80",
   },
 ];
 

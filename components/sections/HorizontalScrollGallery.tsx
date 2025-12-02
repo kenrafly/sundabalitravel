@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useUIStore } from "@/store/uiStore";
 
@@ -130,13 +131,15 @@ export default function HorizontalScrollGallery({
                 </motion.div>
 
                 {/* Explore Button */}
-                <motion.button
-                  className="mt-6 px-8 py-4 border-2 border-secondary text-secondary rounded-full font-semibold hover:bg-secondary hover:text-primary transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Explore
-                </motion.button>
+                <Link href="/tours">
+                  <motion.button
+                    className="mt-6 px-8 py-4 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Explore
+                  </motion.button>
+                </Link>
               </div>
 
               {/* Number Indicator */}

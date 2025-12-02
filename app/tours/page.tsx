@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Clock,
-  MapPin,
   Search,
   Filter,
   ChevronRight,
@@ -22,11 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
   allDestinations,
-  destinationsByRegion,
-  destinationsByCategory,
-  featuredDestinations,
 } from "@/lib/data/destinations";
-import TiltCard from "@/components/ui/TiltCard";
 import {
   MagneticButton,
   ScrollReveal,
@@ -77,23 +72,28 @@ export default function ToursPage() {
     endIndex
   );
 
-  // Reset to page 1 when filters change
-  useEffect(() => {
+  // Handle filter changes - reset page
+  const handleFilterChange = () => {
     setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    handleFilterChange();
   }, [selectedCategory, selectedRegion, searchQuery]);
 
   // Scroll to top when page changes with loading simulation
-  useEffect(() => {
-    setIsLoading(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, [currentPage]);
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setIsLoading(true);
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const timer = setTimeout(() => setIsLoading(false), 300);
+      return () => clearTimeout(timer);
+    }
+  };
 
   const goToPage = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
+    handlePageChange(page);
   };
 
   const getPageNumbers = () => {
@@ -110,8 +110,8 @@ export default function ToursPage() {
       pages.push(1);
 
       // Calculate range around current page
-      let start = Math.max(2, currentPage - 1);
-      let end = Math.min(totalPages - 1, currentPage + 1);
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
 
       // Add ellipsis after first page if needed
       if (start > 2) {
@@ -191,7 +191,7 @@ export default function ToursPage() {
             className="space-y-4"
           >
             <TextReveal className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white">
-              Discover Bali's Wonders
+              Discover Bali&apos;s Wonders
             </TextReveal>
             <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               50+ carefully curated destinations across South and North Bali
@@ -200,7 +200,7 @@ export default function ToursPage() {
               <Badge className="bg-primary/90 backdrop-blur-sm text-white text-base px-4 py-2">
                 🏖️ Pristine Beaches
               </Badge>
-              <Badge className="bg-secondary/90 backdrop-blur-sm text-primary text-base px-4 py-2">
+              <Badge className="bg-secondary/90 backdrop-blur-sm text-white  text-base px-4 py-2">
                 💧 Stunning Waterfalls
               </Badge>
               <Badge className="bg-white/20 backdrop-blur-sm text-white text-base px-4 py-2">
@@ -372,7 +372,7 @@ export default function ToursPage() {
                   </Card>
                 ))
               ) : paginatedDestinations.length > 0 ? (
-                paginatedDestinations.map((destination, index) => (
+                paginatedDestinations.map((destination) => (
                   <ScrollReveal key={destination.id}>
                     <Link
                       href={`/tours/${destination.slug}`}
@@ -639,11 +639,11 @@ export default function ToursPage() {
             <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-8 md:p-12 text-center space-y-6">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold">
-                  Can't Find What You're Looking For?
+                  Can&apos;t Find What You&apos;re Looking For?
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                   We offer fully customizable private tours. Tell us your dream
-                  itinerary and we'll make it happen!
+                  itinerary and we&apos;ll make it happen!
                 </p>
                 <MagneticButton>
                   <Button

@@ -19,8 +19,6 @@ import { testimonials } from "@/lib/data/tours";
 import HorizontalScrollGallery from "@/components/sections/HorizontalScrollGallery";
 import {
   MagneticButton,
-  TextReveal,
-  ScrollReveal,
   ParallaxImage,
 } from "@/components/animations/AdvancedAnimations";
 import { featuredDestinations } from "@/lib/data/tours";
@@ -103,7 +101,7 @@ export default function Home() {
         </AnimatePresence>
 
         {/* Darker overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-[1]" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/60 z-1" />
 
         {/* Hero Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -144,7 +142,7 @@ export default function Home() {
                   <MagneticButton>
                     <Button
                       size="lg"
-                      className="gradient-primary text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 group w-full sm:w-auto min-h-[56px] active:scale-95 transition-transform"
+                      className="gradient-primary text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 group w-full sm:w-auto min-h-14 active:scale-95 transition-transform"
                     >
                       {t("hero.bookWhatsApp", language)}
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -156,7 +154,7 @@ export default function Home() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 w-full sm:w-auto min-h-[56px] active:scale-95 transition-transform"
+                      className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 w-full sm:w-auto min-h-14 active:scale-95 transition-transform"
                     >
                       {t("hero.viewPackages", language)}
                     </Button>
@@ -297,16 +295,16 @@ export default function Home() {
         <div className="absolute bottom-20 right-20 w-16 h-16 border-2 border-secondary/20 rounded-full hidden lg:block" />
         <div className="absolute top-1/3 right-1/4 w-12 h-12 bg-primary/5 rotate-45 hidden lg:block" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 sm:mb-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 sm:pt-0">
+          <div className="text-center mb-16 sm:mb-24">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="inline-block mb-4"
+              className="inline-block mb-6"
             >
-              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold tracking-wider uppercase">
+              <span className="px-6 py-3 bg-gradient-to-r from-primary/15 to-secondary/15 text-primary rounded-full text-sm sm:text-base font-bold tracking-wider uppercase shadow-md">
                 {t("services.badge", language)}
               </span>
             </motion.div>
@@ -316,7 +314,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4 sm:mb-6 bg-gradient-to-r from-primary via-foreground to-secondary bg-clip-text text-transparent px-4"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-gray-900 mb-6 sm:mb-8 leading-tight px-4"
             >
               {t("services.title", language)}
             </motion.h2>
@@ -326,13 +324,13 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-6"
+              className="text-sm sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-6 font-body"
             >
               {t("services.description", language)}
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -396,37 +394,37 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-8"
+            className="mt-20 sm:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12"
           >
-            <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">
+            <div className="text-center group">
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
                 500+
               </div>
-              <div className="text-sm sm:text-base text-muted-foreground">
+              <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.travelers", language)}
               </div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">
+            <div className="text-center group">
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
                 50+
               </div>
-              <div className="text-sm sm:text-base text-muted-foreground">
+              <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.destinations", language)}
               </div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">
+            <div className="text-center group">
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
                 24/7
               </div>
-              <div className="text-sm sm:text-base text-muted-foreground">
+              <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.support", language)}
               </div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">
+            <div className="text-center group">
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
                 100%
               </div>
-              <div className="text-sm sm:text-base text-muted-foreground">
+              <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.satisfaction", language)}
               </div>
             </div>
@@ -527,7 +525,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-foreground mb-6 bg-gradient-to-r from-secondary via-foreground to-primary bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-6 bg-linear-to-r from-secondary via-foreground to-primary bg-clip-text text-transparent"
             >
               {t("testimonials.title", language)}
             </motion.h2>
@@ -543,25 +541,80 @@ export default function Home() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {testimonials.map((testimonial, index) => (
+          <div className="relative">
+            {/* First Row - Moving Left to Right */}
+            <div className="overflow-hidden mb-6 sm:mb-8">
               <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="flex gap-4 sm:gap-6"
+                animate={{
+                  x: [0, -1920],
+                }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 40,
+                    ease: "linear",
+                  },
+                }}
               >
-                <TestimonialCard
-                  name={testimonial.name}
-                  location={testimonial.location}
-                  rating={testimonial.rating}
-                  comment={testimonial.comment}
-                  image={testimonial.image}
-                  delay={index * 0.1}
-                />
+                {/* Duplicate testimonials 3 times for seamless loop */}
+                {[...testimonials, ...testimonials, ...testimonials].map(
+                  (testimonial, index) => (
+                    <div
+                      key={`row1-${index}`}
+                      className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px]"
+                    >
+                      <TestimonialCard
+                        name={testimonial.name}
+                        location={testimonial.location}
+                        rating={testimonial.rating}
+                        comment={testimonial.comment}
+                        image={testimonial.image}
+                        delay={0}
+                      />
+                    </div>
+                  )
+                )}
               </motion.div>
-            ))}
+            </div>
+
+            {/* Second Row - Moving Right to Left */}
+            <div className="overflow-hidden">
+              <motion.div
+                className="flex gap-4 sm:gap-6"
+                animate={{
+                  x: [-1920, 0],
+                }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 40,
+                    ease: "linear",
+                  },
+                }}
+              >
+                {/* Duplicate testimonials 3 times for seamless loop */}
+                {[...testimonials, ...testimonials, ...testimonials].map(
+                  (testimonial, index) => (
+                    <div
+                      key={`row2-${index}`}
+                      className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px]"
+                    >
+                      <TestimonialCard
+                        name={testimonial.name}
+                        location={testimonial.location}
+                        rating={testimonial.rating}
+                        comment={testimonial.comment}
+                        image={testimonial.image}
+                        delay={0}
+                      />
+                    </div>
+                  )
+                )}
+              </motion.div>
+            </div>
           </div>
 
           {/* Trust Badges */}
@@ -639,7 +692,7 @@ export default function Home() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-2">
           {/* Floating Shapes */}
           <motion.div
             animate={{
