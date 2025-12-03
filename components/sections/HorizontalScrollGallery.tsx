@@ -16,6 +16,7 @@ interface Destination {
   name: string;
   description: string;
   image: string;
+  slug?: string;
 }
 
 interface HorizontalScrollGalleryProps {
@@ -35,30 +36,28 @@ export default function HorizontalScrollGallery({
 
     if (!container || !scrollContainer) return;
 
-    const scrollWidth = scrollContainer.scrollWidth;
-    const viewportWidth = window.innerWidth;
+    let ctx = gsap.context(() => {
+      let getRatio = (el: HTMLElement) =>
+        window.innerHeight / (window.innerHeight + el.offsetHeight);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: () => `+=${scrollWidth - viewportWidth}`,
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
+      const scrollWidth = scrollContainer.scrollWidth;
+      const viewportWidth = window.innerWidth;
+
+      gsap.to(scrollContainer, {
+        x: -(scrollWidth - viewportWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
     });
 
-    tl.to(scrollContainer, {
-      x: () => -(scrollWidth - viewportWidth),
-      ease: "none",
-    });
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-    };
+    return () => ctx.revert();
   }, [destinations]);
 
   return (
@@ -73,7 +72,7 @@ export default function HorizontalScrollGallery({
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-6xl font-heading font-bold text-foreground"
         >
-          Discover Bali
+          Tour Packages
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: -20 }}
@@ -81,7 +80,7 @@ export default function HorizontalScrollGallery({
           transition={{ duration: 0.8, delay: 0.1 }}
           className="text-lg md:text-xl text-muted-foreground mt-2"
         >
-          Scroll to explore destinations
+          Scroll to explore {destinations.length} packages
         </motion.p>
       </div>
 
@@ -120,7 +119,7 @@ export default function HorizontalScrollGallery({
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <span className="text-secondary text-sm md:text-base font-semibold tracking-widest uppercase mb-2 block">
-                    Destination {String(index + 1).padStart(2, "0")}
+                    Package {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
                     {destination.name}
@@ -131,13 +130,17 @@ export default function HorizontalScrollGallery({
                 </motion.div>
 
                 {/* Explore Button */}
-                <Link href="/tours">
+                <Link
+                  href={
+                    destination.slug ? `/tours/${destination.slug}` : "/tours"
+                  }
+                >
                   <motion.button
                     className="mt-6 px-8 py-4 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Explore
+                    {destination.slug ? "View Package" : "Explore"}
                   </motion.button>
                 </Link>
               </div>

@@ -21,7 +21,7 @@ import {
   MagneticButton,
   ParallaxImage,
 } from "@/components/animations/AdvancedAnimations";
-import { featuredDestinations } from "@/lib/data/tours";
+import { tourPackages } from "@/lib/data/tour-packages";
 import { useState, useEffect } from "react";
 import { t } from "@/lib/translations";
 import { useUIStore } from "@/store/uiStore";
@@ -29,6 +29,14 @@ import { useUIStore } from "@/store/uiStore";
 export default function Home() {
   const { language } = useUIStore();
   const whatsappNumber = "+62895402261536";
+
+  // Transform tour packages for HorizontalScrollGallery
+  const galleryDestinations = tourPackages.map((pkg) => ({
+    name: pkg.name,
+    description: pkg.description,
+    image: pkg.image,
+    slug: pkg.slug,
+  }));
 
   const heroSlides = [
     {
@@ -433,7 +441,7 @@ export default function Home() {
       </section>
 
       {/* Horizontal Scroll Gallery - Featured Destinations */}
-      <HorizontalScrollGallery destinations={featuredDestinations} />
+      <HorizontalScrollGallery destinations={galleryDestinations} />
 
       {/* Testimonials Section */}
       <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
