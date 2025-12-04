@@ -406,7 +406,7 @@ export default function Home() {
           >
             <div className="text-center group">
               <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
-                500+
+                100+
               </div>
               <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.travelers", language)}
@@ -414,7 +414,7 @@ export default function Home() {
             </div>
             <div className="text-center group">
               <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
-                50+
+                100
               </div>
               <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.destinations", language)}
@@ -430,7 +430,7 @@ export default function Home() {
             </div>
             <div className="text-center group">
               <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
-                100%
+                2024
               </div>
               <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {t("services.satisfaction", language)}

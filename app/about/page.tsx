@@ -416,9 +416,6 @@ export default function AboutPage() {
                         <p className="font-bold text-lg text-foreground">
                           TripAdvisor Excellence
                         </p>
-                        <p className="text-sm text-muted-foreground">
-                          Awarded 2023 & 2024
-                        </p>
                       </div>
                     </div>
                   </motion.div>

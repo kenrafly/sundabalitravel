@@ -39,18 +39,18 @@ export const baseTranslations: Record<string, string> = {
   "services.airportDesc":
     "Hassle-free pickup and drop-off service for a smooth start to your journey",
   "services.travelers": "Happy Travelers",
-  "services.destinations": "Destinations",
+  "services.destinations": "Tour Packages",
   "services.support": "Support",
-  "services.satisfaction": "Satisfaction",
+  "services.satisfaction": "Established",
 
   // Testimonials
   "testimonials.badge": "Testimonials",
   "testimonials.title": "What Travelers Say",
   "testimonials.description":
-    "Join thousands of happy travelers who discovered Bali with us and created memories that last a lifetime",
+    "Join our growing family of travelers discovering authentic Bali experiences. Every journey with us is personal and memorable.",
   "testimonials.verified": "Verified Reviews",
-  "testimonials.rating": "4.9/5 Rating",
-  "testimonials.customers": "500+ Happy Customers",
+  "testimonials.rating": "5.0/5 Rating",
+  "testimonials.customers": "Growing Community",
 
   // CTA
   "cta.badge": "Start Your Journey",
