@@ -65,11 +65,9 @@ export const tourPackages: TourPackage[] = [
       "Beautiful Beaches",
     ],
     price: {
-      amount: 25,
-      perPerson: true,
-      minimumPeople: 2,
-      soloTravelerPrice: 50,
-      priceNote: "2 people: $40 total, 3+ people: $15/person discount",
+      amount: 50,
+      perPerson: false,
+      priceNote: "1 person: $50, 2 people: $70, 3+ people: $85",
     },
     included: ["Bottled water", "Private car", "Professional driver"],
     excluded: ["Entrance tickets (pay by yourself)", "Personal expenses"],
@@ -109,9 +107,9 @@ export const tourPackages: TourPackage[] = [
       "Ulun Danu Beratan Temple",
     ],
     price: {
-      amount: 50,
-      perPerson: true,
-      priceNote: "2 people: $90 total, 3+ people: $40/person",
+      amount: 70,
+      perPerson: false,
+      priceNote: "1 person: $70, 2 people: $90, 3+ people: $110",
     },
     included: [
       "All entrance tickets",
@@ -156,8 +154,8 @@ export const tourPackages: TourPackage[] = [
     ],
     price: {
       amount: 100,
-      perPerson: true,
-      priceNote: "2 people: $190 total, 3+ people: $90/person",
+      perPerson: false,
+      priceNote: "1 person: $100, 2 people: $150, 3+ people: $200",
     },
     included: [
       "Boat for dolphin watching",
@@ -197,11 +195,9 @@ export const tourPackages: TourPackage[] = [
       "Banyumala Twin Waterfalls",
     ],
     price: {
-      amount: 50,
-      perPerson: true,
-      minimumPeople: 2,
-      soloTravelerPrice: 90,
-      priceNote: "2 people: $90 total, 3+ people: $40/person",
+      amount: 90,
+      perPerson: false,
+      priceNote: "1 person: $90, 2 people: $120, 3+ people: $150",
     },
     included: [
       "All entrance tickets",
@@ -248,9 +244,9 @@ export const tourPackages: TourPackage[] = [
       "Goa Raja",
     ],
     price: {
-      amount: 60,
-      perPerson: true,
-      priceNote: "2 people: $110 total, 3+ people: $50/person",
+      amount: 70,
+      perPerson: false,
+      priceNote: "1 person: $70, 2 people: $100, 3+ people: $130",
     },
     included: [
       "Lunch",
@@ -296,9 +292,9 @@ export const tourPackages: TourPackage[] = [
       "Kintamani Volcano View",
     ],
     price: {
-      amount: 50,
-      perPerson: true,
-      priceNote: "2 people: $90 total, 3+ people: $40/person",
+      amount: 60,
+      perPerson: false,
+      priceNote: "1 person: $60, 2 people: $75, 3+ people: $90",
     },
     included: [
       "All entrance tickets",
@@ -346,8 +342,8 @@ export const tourPackages: TourPackage[] = [
     ],
     price: {
       amount: 60,
-      perPerson: true,
-      priceNote: "2 people: $110 total, 3+ people: $50/person",
+      perPerson: false,
+      priceNote: "1 person: $60, 2 people: $110, 3+ people: $50",
     },
     included: [
       "All entrance tickets",
@@ -395,10 +391,10 @@ export const tourPackages: TourPackage[] = [
       "Buggy Ride (Optional)",
     ],
     price: {
-      amount: 100,
-      perPerson: true,
+      amount: 115,
+      perPerson: false,
       priceNote:
-        "All activities included except buggy and tubing. 2 people: $190 total, 3+ people: $90/person",
+        "1 person: $115, 2 people: $185, 3+ people: $255. Swing is optional.",
     },
     included: [
       "ATV quad bike",
@@ -448,9 +444,9 @@ export const tourPackages: TourPackage[] = [
       "Natural Hot Springs",
     ],
     price: {
-      amount: 100,
-      perPerson: true,
-      priceNote: "All inclusive. 2 people: $190 total, 3+ people: $90/person",
+      amount: 130,
+      perPerson: false,
+      priceNote: "1 person: $130, 2 people: $170, 3+ people: $210",
     },
     included: [
       "4WD Jeep",
@@ -499,10 +495,9 @@ export const tourPackages: TourPackage[] = [
       "Dolphin Swimming Experience",
     ],
     price: {
-      amount: 120,
-      perPerson: true,
-      priceNote:
-        "All inclusive package. 2 people: $230 total, 3+ people: $110/person",
+      amount: 50,
+      perPerson: false,
+      priceNote: "1 person: $50, 2 people: $70, 3+ people: $90",
     },
     included: [
       "All park entrance tickets",

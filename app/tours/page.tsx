@@ -202,9 +202,6 @@ export default function ToursPage() {
               <Badge className="bg-primary/90 backdrop-blur-sm text-white text-base px-4 py-2">
                 🎯 All-Inclusive Packages
               </Badge>
-              <Badge className="bg-secondary/90 backdrop-blur-sm text-white  text-base px-4 py-2">
-                💰 Group Discounts
-              </Badge>
               <Badge className="bg-white/20 backdrop-blur-sm text-white text-base px-4 py-2">
                 🚗 Private Transport
               </Badge>

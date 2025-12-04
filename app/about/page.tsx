@@ -22,10 +22,10 @@ import {
 import TiltCard from "@/components/ui/TiltCard";
 import { useRef } from "react";
 const stats = [
-  { number: "3000+", label: "Happy Travelers", icon: ThumbsUp },
-  { number: "15+", label: "Expert Guides", icon: Users },
+  { number: "100+", label: "Happy Travelers", icon: ThumbsUp },
+  { number: "5+", label: "Expert Guides", icon: Users },
   { number: "50+", label: "Destinations", icon: MapPin },
-  { number: "6+", label: "Years Experience", icon: Calendar },
+  { number: "New", label: "Fresh & Passionate", icon: Calendar },
 ];
 
 const values = [
@@ -60,44 +60,44 @@ const values = [
 
 const timeline = [
   {
-    year: "2018",
+    year: "2024",
     title: "The Beginning",
     description:
-      "Started as a small family-run tour service with one vehicle and a dream to share Bali's beauty",
+      "Founded by a passionate Sundanese family with a dream to share Bali's authentic beauty with the world",
   },
   {
-    year: "2019",
-    title: "Growing Together",
+    year: "Early 2024",
+    title: "First Steps",
     description:
-      "Expanded our fleet and team, serving over 500 happy travelers from around the world",
+      "Started with a small team of local guides who know Bali like the back of their hands",
   },
   {
-    year: "2021",
-    title: "Digital Expansion",
+    year: "Mid 2024",
+    title: "Building Trust",
     description:
-      "Launched our online booking system and gained recognition for exceptional service",
+      "Welcomed our first travelers and received amazing feedback that fuels our passion every day",
   },
   {
-    year: "2023",
-    title: "Award Recognition",
+    year: "Late 2024",
+    title: "Growing Family",
     description:
-      "Received the TripAdvisor Certificate of Excellence and expanded to specialized tours",
+      "Expanded our tour offerings and built partnerships with local communities across Bali",
   },
   {
-    year: "2024",
-    title: "Today",
+    year: "Today",
+    title: "Your Adventure Awaits",
     description:
-      "Serving 3000+ travelers annually with a team of 15+ experienced guides and drivers",
+      "Ready to create unforgettable experiences with fresh perspectives and genuine Sundanese hospitality",
   },
 ];
 
 const gallery = [
-  "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&auto=format&fit=crop",
+  "/East Bali/Gate of Heaven.jpg",
+  "/Unesco Heritage/Tanah Lot.png",
+  "/Ubud A/Tirta Empul.jpg",
+  "/South Bali/Uluwatu temple.webp",
+  "/Lovina Dolphin Tour/Ulun Danu.jpg",
+  "/Waterfall in Bali/Sekumpul waterfall.webp",
 ];
 
 export default function AboutPage() {
@@ -177,7 +177,7 @@ export default function AboutPage() {
               className="inline-block"
             >
               <span className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-semibold text-sm tracking-wider uppercase">
-                ✨ Award-Winning Tour Operator
+                ✨ Your Fresh Bali Adventure Starts Here
               </span>
             </motion.div>
 
@@ -190,7 +190,7 @@ export default function AboutPage() {
               >
                 We Are
                 <br />
-                <span className="bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="bg-clip-text text-white bg-linear-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient">
                   Sunda Bali
                 </span>
               </motion.h1>
@@ -217,7 +217,7 @@ export default function AboutPage() {
             >
               Where Sunda warmth meets Balinese beauty,
               <br />
-              creating unforgettable journeys since 2018
+              bringing you authentic experiences with fresh passion
             </motion.p>
 
             <motion.div
@@ -799,7 +799,7 @@ export default function AboutPage() {
                 <Card className="group hover:shadow-2xl transition-all duration-500 hover:border-primary/50 ml-4">
                   <CardContent className="p-6 sm:p-8">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-                      <span className="inline-block px-4 py-2 rounded-full bg-linear-to-r from-primary to-secondary text-white text-lg font-bold tracking-wider shadow-lg">
+                      <span className="inline-block px-4 py-2 rounded-full bg-linear-to-r from-primary to-secondary text-black text-lg font-bold tracking-wider shadow-lg">
                         {item.year}
                       </span>
                       <div className="hidden sm:block w-16 h-1 bg-linear-to-r from-primary/50 to-transparent rounded self-center" />
@@ -966,8 +966,8 @@ export default function AboutPage() {
             </h2>
 
             <p className="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Join thousands of travelers who've discovered the magic of Bali
-              with us
+              Be part of our journey as we create authentic Bali experiences
+              with genuine care and passion
             </p>
 
             <motion.div

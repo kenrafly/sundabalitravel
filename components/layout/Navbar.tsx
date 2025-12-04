@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,14 +36,23 @@ export default function Navbar() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative"
+              className="relative flex items-center space-x-3"
             >
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-primary">
-                Sunda Bali
-              </h1>
-              <p className="text-xs sm:text-sm font-body text-gray-600">
-                Tour & Travel
-              </p>
+              <Image
+                src="/logo.jpeg"
+                alt="Sunda Bali Tour Logo"
+                width={50}
+                height={50}
+                className="rounded-full object-cover"
+              />
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-primary">
+                  Sunda Bali
+                </h1>
+                <p className="text-xs sm:text-sm font-body text-gray-600">
+                  Tour & Travel
+                </p>
+              </div>
             </motion.div>
           </Link>
 

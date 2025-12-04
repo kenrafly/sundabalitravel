@@ -34,50 +34,29 @@ export default function PackageDetailPage() {
   const slug = params.slug as string;
   const pkg = tourPackages.find((p) => p.slug === slug);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [numPeople, setNumPeople] = useState(2);
   const whatsappNumber = "+62895402261536";
 
   if (!pkg) {
     notFound();
   }
 
-  // Calculate pricing based on number of people
-  const calculatePrice = () => {
-    if (!pkg.price.perPerson) {
-      return { total: pkg.price.amount, perPerson: null };
-    }
-
-    if (numPeople === 1 && pkg.price.soloTravelerPrice) {
-      return {
-        total: pkg.price.soloTravelerPrice,
-        perPerson: pkg.price.soloTravelerPrice,
-      };
-    }
-
-    if (pkg.price.minimumPeople && numPeople < pkg.price.minimumPeople) {
-      return {
-        total: null,
-        perPerson: null,
-        error: `Minimum ${pkg.price.minimumPeople} people required`,
-      };
-    }
-
-    // Apply group discount logic
-    if (numPeople === 2) {
-      const total = pkg.price.amount * 2 - 10;
-      return { total, perPerson: total / 2 };
-    }
-
-    if (numPeople >= 3) {
-      const discountedPrice = pkg.price.amount - 10;
-      const total = discountedPrice * numPeople;
-      return { total, perPerson: discountedPrice };
-    }
-
-    return { total: pkg.price.amount * numPeople, perPerson: pkg.price.amount };
+  // Extract pricing tiers from priceNote
+  const getPricingTiers = () => {
+    const priceNote = pkg.price.priceNote || "";
+    const tiers = [];
+    
+    const onePersonMatch = priceNote.match(/1\s*person:\s*\$(\d+)/i);
+    const twoPeopleMatch = priceNote.match(/2\s*people:\s*\$(\d+)/i);
+    const threePlusMatch = priceNote.match(/3\+\s*people:\s*\$(\d+)/i);
+    
+    if (onePersonMatch) tiers.push({ label: "1 Person", price: parseInt(onePersonMatch[1]) });
+    if (twoPeopleMatch) tiers.push({ label: "2 People", price: parseInt(twoPeopleMatch[1]) });
+    if (threePlusMatch) tiers.push({ label: "3+ People", price: parseInt(threePlusMatch[1]) });
+    
+    return tiers;
   };
 
-  const pricing = calculatePrice();
+  const pricingTiers = getPricingTiers();
 
   // Get related packages (same region or category)
   const relatedPackages = tourPackages
@@ -89,13 +68,7 @@ export default function PackageDetailPage() {
     .slice(0, 3);
 
   const handleBookNow = () => {
-    const message = `Hi! I'm interested in the "${
-      pkg.name
-    }" tour package for ${numPeople} ${
-      numPeople === 1 ? "person" : "people"
-    }. ${
-      pricing.total ? `Total: $${pricing.total}` : ""
-    } Can you help arrange this?`;
+    const message = `Hi! I'm interested in the "${pkg.name}" tour package. Can you help arrange this?`;
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -283,9 +256,9 @@ export default function PackageDetailPage() {
                   <div className="flex items-center gap-2">
                     <DollarSign className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="text-xs text-muted-foreground">From</p>
+                      <p className="text-xs text-muted-foreground">Starting</p>
                       <p className="font-semibold text-primary">
-                        ${pkg.price.amount}/person
+                        ${pkg.price.amount}
                       </p>
                     </div>
                   </div>
@@ -439,11 +412,7 @@ export default function PackageDetailPage() {
                       </p>
                       <p>• Please wear comfortable clothing and shoes</p>
                       <p>• Bring sunscreen, hat, and swimwear if applicable</p>
-                      <p>
-                        • This tour requires a minimum of{" "}
-                        {pkg.price.minimumPeople || 1}{" "}
-                        {pkg.price.minimumPeople === 1 ? "person" : "people"}
-                      </p>
+                      <p>• Available for solo travelers and groups</p>
                       <p>
                         • Cancellation policy: Full refund if canceled 48 hours
                         in advance
@@ -462,78 +431,39 @@ export default function PackageDetailPage() {
                     <CardContent className="p-6 space-y-6">
                       <div className="text-center">
                         <h3 className="text-2xl font-heading font-bold mb-2">
-                          Book This Tour
+                          Tour Pricing
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          Select number of people
+                          Fixed prices per group size
                         </p>
                       </div>
 
-                      {/* People Selector */}
+                      {/* Pricing List */}
                       <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="font-medium">Number of People</span>
-                          <div className="flex items-center gap-3">
-                            <Button
-                              onClick={() =>
-                                setNumPeople(Math.max(1, numPeople - 1))
-                              }
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                            >
-                              -
-                            </Button>
-                            <span className="font-bold text-lg w-8 text-center">
-                              {numPeople}
+                        {pricingTiers.map((tier, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-4 bg-primary/5 rounded-lg border border-primary/10"
+                          >
+                            <span className="font-semibold text-foreground">
+                              {tier.label}
                             </span>
-                            <Button
-                              onClick={() => setNumPeople(numPeople + 1)}
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                            >
-                              +
-                            </Button>
+                            <span className="text-2xl font-bold text-primary">
+                              ${tier.price}
+                            </span>
                           </div>
-                        </div>
+                        ))}
                       </div>
 
-                      {/* Pricing Display */}
-                      <div className="p-4 bg-primary/5 rounded-lg space-y-2">
-                        {pricing.error ? (
-                          <p className="text-center text-red-600 font-medium">
-                            {pricing.error}
-                          </p>
-                        ) : (
-                          <>
-                            {pricing.perPerson && (
-                              <div className="flex justify-between text-sm text-muted-foreground">
-                                <span>Price per person</span>
-                                <span className="font-semibold">
-                                  ${pricing.perPerson}
-                                </span>
-                              </div>
-                            )}
-                            <div className="flex justify-between items-center pt-2 border-t border-border">
-                              <span className="font-semibold">Total Price</span>
-                              <span className="text-3xl font-bold text-primary">
-                                ${pricing.total}
-                              </span>
-                            </div>
-                            {pkg.price.priceNote && (
-                              <p className="text-xs text-muted-foreground text-center pt-2">
-                                {pkg.price.priceNote}
-                              </p>
-                            )}
-                          </>
-                        )}
-                      </div>
+                      {pkg.price.priceNote && pkg.price.priceNote.includes("optional") && (
+                        <p className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
+                          Note: {pkg.price.priceNote.split('.').find(s => s.includes("optional"))}
+                        </p>
+                      )}
 
                       <MagneticButton>
                         <Button
                           onClick={handleBookNow}
-                          disabled={!!pricing.error}
                           className="w-full gradient-primary text-white text-lg py-6 group"
                           size="lg"
                         >
