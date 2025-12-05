@@ -156,7 +156,7 @@ export default function ContactPage() {
 
                     <div className="pt-6 border-t border-border space-y-4">
                       <h3 className="font-semibold">Other Contact Options</h3>
-                      
+
                       <div className="space-y-3">
                         <a
                           href={`tel:${whatsappNumber}`}
