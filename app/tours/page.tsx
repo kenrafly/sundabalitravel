@@ -55,7 +55,7 @@ export default function ToursPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   // Filter packages
   const filteredPackages = tourPackages.filter((pkg) => {

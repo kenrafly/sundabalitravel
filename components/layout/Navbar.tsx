@@ -20,7 +20,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useUIStore();
 
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   return (
     <motion.nav

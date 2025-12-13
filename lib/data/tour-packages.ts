@@ -551,6 +551,7 @@ export const tourPackages: TourPackage[] = [
       priceNote: "1 person: $95, 2 people: $155, 3+ people: $200",
     },
     included: [
+      "Hotel pickup and drop-off",
       "Fast boat transfers to/from Nusa Penida",
       "Snorkeling equipment (mask, fins, life jacket)",
       "Professional snorkeling guide",
@@ -560,7 +561,6 @@ export const tourPackages: TourPackage[] = [
       "Insurance coverage",
     ],
     excluded: [
-      "Hotel pickup/drop-off (can be arranged)",
       "Personal expenses",
       "Tips for guide and crew",
     ],

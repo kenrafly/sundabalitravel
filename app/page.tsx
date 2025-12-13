@@ -31,7 +31,7 @@ import { useUIStore } from "@/store/uiStore";
 
 export default function Home() {
   const { language } = useUIStore();
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   // Transform tour packages for HorizontalScrollGallery
   const galleryDestinations = tourPackages.map((pkg) => ({
@@ -80,7 +80,7 @@ export default function Home() {
     {
       question: "How do I book a tour?",
       answer:
-        "Booking is easy! Simply click the 'Book on WhatsApp' button on any tour page or contact us directly via WhatsApp at +62 895-4022-61536. Our team will guide you through the booking process and answer any questions you have.",
+        "Booking is easy! Simply click the 'Book on WhatsApp' button on any tour page or contact us directly via WhatsApp at +62 857-2433-6853. Our team will guide you through the booking process and answer any questions you have.",
     },
     {
       question: "What is your cancellation policy?",

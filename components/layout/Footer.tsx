@@ -24,7 +24,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   return (
     <footer className="bg-linear-to-b from-background to-muted border-t border-border">
@@ -144,7 +144,7 @@ export default function Footer() {
                   href={`https://wa.me/${whatsappNumber}`}
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  +62 895-4022-61536
+                  +62 857-2433-6853
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-sm">

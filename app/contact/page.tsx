@@ -10,8 +10,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone / WhatsApp",
-    content: "+62 895-4022-61536",
-    link: "https://wa.me/62895402261536",
+    content: "+62 857-2433-6853",
+    link: "https://wa.me/6285724336853",
   },
   {
     icon: Mail,
@@ -28,7 +28,7 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   return (
     <div className="min-h-screen pt-20">
@@ -166,7 +166,7 @@ export default function ContactPage() {
                           <div>
                             <p className="font-medium">Call Us</p>
                             <p className="text-sm text-muted-foreground">
-                              +62 895-4022-61536
+                              +62 857-2433-6853
                             </p>
                           </div>
                         </a>

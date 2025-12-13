@@ -6,7 +6,7 @@ import { MessageCircle, X } from "lucide-react";
 
 export default function WhatsAppFAB() {
   const [showTooltip, setShowTooltip] = useState(false);
-  const whatsappNumber = "+62895402261536"; // Replace with actual number
+  const whatsappNumber = "+6285724336853"; // Replace with actual number
   const message = "Hi! I would like to know more about your Bali tours.";
 
   useEffect(() => {

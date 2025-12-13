@@ -34,7 +34,7 @@ export default function PackageDetailPage() {
   const slug = params.slug as string;
   const pkg = tourPackages.find((p) => p.slug === slug);
   const [selectedImage, setSelectedImage] = useState(0);
-  const whatsappNumber = "+62895402261536";
+  const whatsappNumber = "+6285724336853";
 
   if (!pkg) {
     notFound();
@@ -519,7 +519,7 @@ export default function PackageDetailPage() {
                           <span>📧</span> sundabalitour@gmail.com
                         </p>
                         <p className="flex items-center gap-2">
-                          <span>📱</span> +62 895-4022-61536
+                          <span>📱</span> +62 857-2433-6853
                         </p>
                         <p className="flex items-center gap-2">
                           <span>🕐</span> 8 AM - 8 PM (Bali Time)
