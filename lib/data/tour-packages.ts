@@ -47,9 +47,9 @@ export const tourPackages: TourPackage[] = [
     region: "South Bali",
     category: "Beach",
     description:
-      "Explore the iconic landmarks of South Bali including GWK, Uluwatu Temple, thrilling paragliding, and pristine beaches",
+      "Explore the iconic landmarks of South Bali including GWK Cultural Park and beautiful beaches",
     descriptionIndonesian:
-      "Jelajahi landmark ikonik Bali Selatan termasuk GWK, Pura Uluwatu, paragliding yang mendebarkan, dan pantai-pantai indah",
+      "Jelajahi landmark ikonik Bali Selatan termasuk Taman Budaya GWK dan pantai-pantai indah",
     featured: true,
     image: "/South Bali/GWK.jpg",
     gallery: [
@@ -59,25 +59,35 @@ export const tourPackages: TourPackage[] = [
       "/South Bali/Pantai di South Bali.jpg",
     ],
     destinations: [
-      "GWK (Garuda Wisnu Kencana)",
-      "Uluwatu Temple",
-      "Paragliding",
+      "GWK (Garuda Wisnu Kencana) Cultural Park",
+      "Lunch at GWK Restaurant",
       "Beautiful Beaches",
     ],
     price: {
-      amount: 50,
+      amount: 80,
       perPerson: false,
-      priceNote: "1 person: $50, 2 people: $70, 3+ people: $85",
+      priceNote:
+        "1 person: $80, 2 people: $140, 3 people: $200, 4+ people: $260",
     },
-    included: ["Bottled water", "Private car", "Professional driver"],
-    excluded: ["Entrance tickets (pay by yourself)", "Personal expenses"],
+    included: [
+      "GWK entrance ticket",
+      "Lunch at GWK area restaurant",
+      "Bottled water",
+      "Private car",
+      "Professional driver",
+    ],
+    excluded: [
+      "Personal expenses",
+      "Kecak dance (not included)",
+      "Paragliding (not included)",
+    ],
     duration: "8-10 hours",
     difficulty: "Easy",
     bestTimeToVisit: "Morning start recommended",
     highlights: [
       "Visit the iconic 120-meter tall GWK statue",
-      "Explore the ancient Uluwatu Temple on cliff edge",
-      "Experience thrilling paragliding over beaches",
+      "Enjoy lunch at GWK area restaurant",
+      "Explore GWK Cultural Park",
       "Relax at pristine South Bali beaches",
     ],
   },
@@ -109,7 +119,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 70,
       perPerson: false,
-      priceNote: "1 person: $70, 2 people: $90, 3+ people: $110",
+      priceNote:
+        "1 person: $70, 2 people: $120, 3 people: $170, 4+ people: $220",
     },
     included: [
       "All entrance tickets",
@@ -155,7 +166,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 100,
       perPerson: false,
-      priceNote: "1 person: $100, 2 people: $150, 3+ people: $200",
+      priceNote:
+        "1 person: $100, 2 people: $180, 3 people: $260, 4+ people: $340",
     },
     included: [
       "Boat for dolphin watching",
@@ -197,7 +209,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 90,
       perPerson: false,
-      priceNote: "1 person: $90, 2 people: $120, 3+ people: $150",
+      priceNote:
+        "1 person: $90, 2 people: $160, 3 people: $230, 4+ people: $300",
     },
     included: [
       "All entrance tickets",
@@ -246,16 +259,16 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 70,
       perPerson: false,
-      priceNote: "1 person: $70, 2 people: $100, 3+ people: $130",
+      priceNote:
+        "1 person: $70, 2 people: $120, 3 people: $170, 4+ people: $220",
     },
     included: [
-      "Lunch",
       "All entrance tickets",
       "Private car",
       "Bottled water",
       "Professional driver",
     ],
-    excluded: ["Personal expenses"],
+    excluded: ["Lunch", "Personal expenses"],
     duration: "10-12 hours",
     difficulty: "Moderate",
     highlights: [
@@ -294,7 +307,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 60,
       perPerson: false,
-      priceNote: "1 person: $60, 2 people: $75, 3+ people: $90",
+      priceNote:
+        "1 person: $60, 2 people: $100, 3 people: $140, 4+ people: $180",
     },
     included: [
       "All entrance tickets",
@@ -343,7 +357,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 60,
       perPerson: false,
-      priceNote: "1 person: $60, 2 people: $110, 3+ people: $50",
+      priceNote:
+        "1 person: $60, 2 people: $100, 3 people: $140, 4+ people: $180",
     },
     included: [
       "All entrance tickets",
@@ -394,7 +409,7 @@ export const tourPackages: TourPackage[] = [
       amount: 115,
       perPerson: false,
       priceNote:
-        "1 person: $115, 2 people: $185, 3+ people: $255. Swing is optional.",
+        "1 person: $115, 2 people: $210, 3 people: $305, 4+ people: $400. Swing is optional.",
     },
     included: [
       "ATV quad bike",
@@ -446,7 +461,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 130,
       perPerson: false,
-      priceNote: "1 person: $130, 2 people: $170, 3+ people: $210",
+      priceNote:
+        "1 person: $130, 2 people: $240, 3 people: $350, 4+ people: $460",
     },
     included: [
       "4WD Jeep",
@@ -497,7 +513,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 50,
       perPerson: false,
-      priceNote: "1 person: $50, 2 people: $70, 3+ people: $90",
+      priceNote:
+        "1 person: $50, 2 people: $80, 3 people: $110, 4+ people: $140",
     },
     included: [
       "All park entrance tickets",
@@ -548,7 +565,8 @@ export const tourPackages: TourPackage[] = [
     price: {
       amount: 95,
       perPerson: false,
-      priceNote: "1 person: $95, 2 people: $155, 3+ people: $200",
+      priceNote:
+        "1 person: $95, 2 people: $170, 3 people: $245, 4+ people: $320",
     },
     included: [
       "Hotel pickup and drop-off",
