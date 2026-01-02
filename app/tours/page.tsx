@@ -195,7 +195,9 @@ function LazyTourCard({
                 </div>
                 <div className="text-right">
                   <span className="font-bold text-primary whitespace-nowrap text-lg">
-                    {pkg.id === 'nusa-penida-west-snorkeling' ? `IDR ${pkg.price.amount.toLocaleString('id-ID')}` : `$${pkg.price.amount}`}
+                    {pkg.id === "nusa-penida-west-snorkeling"
+                      ? `IDR ${pkg.price.amount.toLocaleString("id-ID")}`
+                      : `$${pkg.price.amount}`}
                   </span>
                   <p className="text-[10px] text-muted-foreground">
                     {pkg.price.perPerson ? "/person" : "total"}
