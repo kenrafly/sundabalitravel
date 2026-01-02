@@ -240,7 +240,7 @@ export default function PackageDetailPage() {
                     <div>
                       <p className="text-xs text-muted-foreground">Starting</p>
                       <p className="font-semibold text-primary">
-                        ${pkg.price.amount}
+                        {pkg.id === 'nusa-penida-west-snorkeling' ? `IDR ${pkg.price.amount.toLocaleString('id-ID')}` : `$${pkg.price.amount}`}
                       </p>
                     </div>
                   </div>
@@ -420,7 +420,7 @@ export default function PackageDetailPage() {
                         </p>
                         <div className="mt-4">
                           <span className="text-5xl font-bold text-primary">
-                            ${pkg.price.amount}
+                            {pkg.id === 'nusa-penida-west-snorkeling' ? `IDR ${pkg.price.amount.toLocaleString('id-ID')}` : `$${pkg.price.amount}`}
                           </span>
                           <p className="text-sm text-muted-foreground mt-2">
                             per person

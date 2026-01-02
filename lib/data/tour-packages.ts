@@ -570,10 +570,10 @@ export const tourPackages: TourPackage[] = [
       "Fast boat to Nusa Penida",
     ],
     price: {
-      amount: 95,
-      perPerson: false,
+      amount: 125000,
+      perPerson: true,
       priceNote:
-        "1 person: $95, 2 people: $190, 3 people: $285, 4+ people: $380",
+        "IDR 125,000 per person",
     },
     included: [
       "Hotel pickup and drop-off",
