@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,9 +11,6 @@ import {
   ChevronRight,
   Star,
   Compass,
-  ChevronLeft,
-  ChevronsLeft,
-  ChevronsRight,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,15 +43,215 @@ const regions = [
   "Central Bali",
   "West Bali",
 ];
-const ITEMS_PER_PAGE = 4;
+
+// Lazy Loading Card Component
+interface LazyCardProps {
+  pkg: any;
+  index: number;
+  onBookNow: (name: string) => void;
+  getCategoryIcon: (category: string) => string;
+  getDifficultyColor: (difficulty: string) => string;
+}
+
+function LazyTourCard({
+  pkg,
+  index,
+  onBookNow,
+  getCategoryIcon,
+  getDifficultyColor,
+}: LazyCardProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+    >
+      {isVisible ? (
+        <Link href={`/tours/${pkg.slug}`} className="block h-full">
+          <Card className="overflow-hidden h-full hover:shadow-2xl transition-all duration-500 group border hover:border-primary/50 bg-card cursor-pointer">
+            <div className="relative h-80 overflow-hidden">
+              <Image
+                src={pkg.image}
+                alt={pkg.name}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
+
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Badges */}
+              <div className="absolute top-4 right-4 flex flex-col gap-2">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Badge className="bg-primary text-white border-0 shadow-lg">
+                    {getCategoryIcon(pkg.category)} {pkg.category}
+                  </Badge>
+                </motion.div>
+                {pkg.featured && (
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Badge className="bg-secondary text-primary border-0 shadow-lg">
+                      <Star className="w-3 h-3 mr-1 fill-current" /> Featured
+                    </Badge>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Region Badge */}
+              <div className="absolute top-4 left-4">
+                <Badge className="bg-black text-white border-white/30 shadow-lg">
+                  📍 {pkg.region}
+                </Badge>
+              </div>
+
+              {/* Difficulty Badge */}
+              <div className="absolute bottom-4 left-4">
+                <Badge
+                  className={`${getDifficultyColor(
+                    pkg.difficulty
+                  )} border shadow-lg`}
+                >
+                  {pkg.difficulty}
+                </Badge>
+              </div>
+            </div>
+
+            <CardContent className="p-5 space-y-3">
+              <div>
+                <h3 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
+                  {pkg.name}
+                </h3>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                  Tour Package • {pkg.destinations.length} Destinations
+                </p>
+              </div>
+
+              <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+                {pkg.description}
+              </p>
+
+              {/* Destinations List */}
+              <div className="space-y-1.5">
+                <p className="text-xs font-semibold text-foreground uppercase tracking-wider">
+                  Includes:
+                </p>
+                <ul className="text-xs text-muted-foreground space-y-1">
+                  {pkg.destinations
+                    .slice(0, 3)
+                    .map((dest: string, idx: number) => (
+                      <li key={idx} className="flex items-start gap-1.5">
+                        <span className="text-primary mt-0.5">•</span>
+                        <span className="line-clamp-1">{dest}</span>
+                      </li>
+                    ))}
+                  {pkg.destinations.length > 3 && (
+                    <li className="text-primary font-medium">
+                      +{pkg.destinations.length - 3} more destinations
+                    </li>
+                  )}
+                </ul>
+              </div>
+
+              <div className="flex items-center justify-between text-sm text-muted-foreground pt-2 border-t border-border/50">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span className="line-clamp-1 font-medium">
+                    {pkg.duration}
+                  </span>
+                </div>
+                <div className="text-right">
+                  <span className="font-bold text-primary whitespace-nowrap text-lg">
+                    ${pkg.price.amount}
+                  </span>
+                  <p className="text-[10px] text-muted-foreground">
+                    {pkg.price.perPerson ? "/person" : "total"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="flex-1 group-hover:border-primary group-hover:text-primary transition-all text-sm font-semibold rounded-full!"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  View Details
+                  <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button
+                  size="default"
+                  className="gradient-primary text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all px-6 rounded-full!"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onBookNow(pkg.name);
+                  }}
+                >
+                  Book Now
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      ) : (
+        // Placeholder while loading
+        <Card className="overflow-hidden h-full animate-pulse">
+          <div className="relative h-80 bg-muted" />
+          <CardContent className="p-5 space-y-3">
+            <div className="h-6 bg-muted rounded" />
+            <div className="h-4 bg-muted rounded w-3/4" />
+            <div className="h-16 bg-muted rounded" />
+            <div className="flex gap-2">
+              <div className="h-9 bg-muted rounded flex-1" />
+              <div className="h-9 bg-muted rounded flex-1" />
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </motion.div>
+  );
+}
 
 export default function ToursPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedRegion, setSelectedRegion] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const whatsappNumber = "+6285724336853";
 
   // Filter packages
@@ -71,68 +268,6 @@ export default function ToursPage() {
       );
     return matchesCategory && matchesRegion && matchesSearch;
   });
-
-  // Pagination calculations
-  const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE);
-
-  // Auto-adjust current page if it exceeds total pages (happens when filters change)
-  const adjustedCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
-  const startIndex = (adjustedCurrentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const paginatedPackages = filteredPackages.slice(startIndex, endIndex);
-
-  // Scroll to top when page changes with loading simulation
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setIsLoading(true);
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => setIsLoading(false), 300);
-    }
-  };
-
-  const goToPage = (page: number) => {
-    handlePageChange(page);
-  };
-
-  const getPageNumbers = () => {
-    const pages = [];
-    const showPages = 5; // Number of page buttons to show
-
-    if (totalPages <= showPages) {
-      // Show all pages if total is less than showPages
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      // Show first page
-      pages.push(1);
-
-      // Calculate range around current page
-      const start = Math.max(2, adjustedCurrentPage - 1);
-      const end = Math.min(totalPages - 1, adjustedCurrentPage + 1);
-
-      // Add ellipsis after first page if needed
-      if (start > 2) {
-        pages.push("...");
-      }
-
-      // Add pages around current page
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
-      }
-
-      // Add ellipsis before last page if needed
-      if (end < totalPages - 1) {
-        pages.push("...");
-      }
-
-      // Show last page
-      pages.push(totalPages);
-    }
-
-    return pages;
-  };
 
   const handleBookNow = (destName: string) => {
     const message = `Hi! I'm interested in visiting "${destName}". Could you help arrange a tour?`;
@@ -347,319 +482,58 @@ export default function ToursPage() {
       {/* Destinations Grid */}
       <section className="py-12 md:py-16 bg-background min-h-[600px]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Results Count */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 text-center"
+          >
+            <p className="text-sm text-muted-foreground">
+              Showing{" "}
+              <span className="font-semibold text-foreground">
+                {filteredPackages.length}
+              </span>{" "}
+              tour package{filteredPackages.length !== 1 ? "s" : ""}
+            </p>
+          </motion.div>
+
           <AnimatePresence mode="wait">
-            <motion.div
-              key={adjustedCurrentPage}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            >
-              {isLoading ? (
-                // Loading skeleton
-                Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
-                  <Card
-                    key={`skeleton-${index}`}
-                    className="overflow-hidden h-full"
-                  >
-                    <div className="relative h-56 bg-muted animate-pulse" />
-                    <CardContent className="p-5 space-y-3">
-                      <div className="h-6 bg-muted rounded animate-pulse" />
-                      <div className="h-4 bg-muted rounded animate-pulse w-3/4" />
-                      <div className="h-16 bg-muted rounded animate-pulse" />
-                      <div className="flex gap-2">
-                        <div className="h-9 bg-muted rounded animate-pulse flex-1" />
-                        <div className="h-9 bg-muted rounded animate-pulse flex-1" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : paginatedPackages.length > 0 ? (
-                paginatedPackages.map((pkg) => (
-                  <ScrollReveal key={pkg.id}>
-                    <Link href={`/tours/${pkg.slug}`} className="block h-full">
-                      <Card className="overflow-hidden h-full hover:shadow-2xl transition-all duration-500 group border hover:border-primary/50 bg-card cursor-pointer">
-                        <div className="relative h-80 overflow-hidden">
-                          <Image
-                            src={pkg.image}
-                            alt={pkg.name}
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
-
-                          {/* Hover Overlay */}
-                          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                          {/* Badges */}
-                          <div className="absolute top-4 right-4 flex flex-col gap-2">
-                            <motion.div
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <Badge className="bg-primary text-white border-0 shadow-lg">
-                                {getCategoryIcon(pkg.category)} {pkg.category}
-                              </Badge>
-                            </motion.div>
-                            {pkg.featured && (
-                              <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                <Badge className="bg-secondary text-primary border-0 shadow-lg">
-                                  <Star className="w-3 h-3 mr-1 fill-current" />{" "}
-                                  Featured
-                                </Badge>
-                              </motion.div>
-                            )}
-                          </div>
-
-                          {/* Region Badge */}
-                          <div className="absolute top-4 left-4">
-                            <Badge className="bg-black text-white border-white/30 shadow-lg">
-                              📍 {pkg.region}
-                            </Badge>
-                          </div>
-
-                          {/* Difficulty Badge */}
-                          <div className="absolute bottom-4 left-4">
-                            <Badge
-                              className={`${getDifficultyColor(
-                                pkg.difficulty
-                              )} border shadow-lg`}
-                            >
-                              {pkg.difficulty}
-                            </Badge>
-                          </div>
-                        </div>
-
-                        <CardContent className="p-5 space-y-3">
-                          <div>
-                            <h3 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
-                              {pkg.name}
-                            </h3>
-                            <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-                              Tour Package • {pkg.destinations.length}{" "}
-                              Destinations
-                            </p>
-                          </div>
-
-                          <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
-                            {pkg.description}
-                          </p>
-
-                          {/* Destinations List */}
-                          <div className="space-y-1.5">
-                            <p className="text-xs font-semibold text-foreground uppercase tracking-wider">
-                              Includes:
-                            </p>
-                            <ul className="text-xs text-muted-foreground space-y-1">
-                              {pkg.destinations.slice(0, 3).map((dest, idx) => (
-                                <li
-                                  key={idx}
-                                  className="flex items-start gap-1.5"
-                                >
-                                  <span className="text-primary mt-0.5">•</span>
-                                  <span className="line-clamp-1">{dest}</span>
-                                </li>
-                              ))}
-                              {pkg.destinations.length > 3 && (
-                                <li className="text-primary font-medium">
-                                  +{pkg.destinations.length - 3} more
-                                  destinations
-                                </li>
-                              )}
-                            </ul>
-                          </div>
-
-                          <div className="flex items-center justify-between text-sm text-muted-foreground pt-2 border-t border-border/50">
-                            <div className="flex items-center gap-2">
-                              <Clock className="w-4 h-4 text-primary" />
-                              <span className="line-clamp-1 font-medium">
-                                {pkg.duration}
-                              </span>
-                            </div>
-                            <div className="text-right">
-                              <span className="font-bold text-primary whitespace-nowrap text-lg">
-                                ${pkg.price.amount}
-                              </span>
-                              <p className="text-[10px] text-muted-foreground">
-                                {pkg.price.perPerson ? "/person" : "total"}
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-2 pt-2">
-                            <Button
-                              variant="outline"
-                              size="default"
-                              className="flex-1 group-hover:border-primary group-hover:text-primary transition-all text-sm font-semibold rounded-full!"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              View Details
-                              <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                            <Button
-                              size="default"
-                              className="gradient-primary text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all px-6 rounded-full!"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleBookNow(pkg.name);
-                              }}
-                            >
-                              Book Now
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </ScrollReveal>
-                ))
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="col-span-full text-center py-16"
-                >
-                  <Compass className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-xl text-muted-foreground mb-2">
-                    No tour packages found
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Try adjusting your filters or search query
-                  </p>
-                </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Pagination Controls */}
-          {!isLoading && paginatedPackages.length > 0 && totalPages > 1 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mt-12 space-y-6"
-            >
-              {/* Page Info */}
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">
-                  Showing{" "}
-                  <span className="font-semibold text-foreground">
-                    {startIndex + 1}
-                  </span>{" "}
-                  to{" "}
-                  <span className="font-semibold text-foreground">
-                    {Math.min(endIndex, filteredPackages.length)}
-                  </span>{" "}
-                  of{" "}
-                  <span className="font-semibold text-foreground">
-                    {filteredPackages.length}
-                  </span>{" "}
-                  tour packages
+            {filteredPackages.length > 0 ? (
+              <motion.div
+                key={`${selectedCategory}-${selectedRegion}-${searchQuery}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              >
+                {filteredPackages.map((pkg, index) => (
+                  <LazyTourCard
+                    key={pkg.id}
+                    pkg={pkg}
+                    index={index}
+                    onBookNow={handleBookNow}
+                    getCategoryIcon={getCategoryIcon}
+                    getDifficultyColor={getDifficultyColor}
+                  />
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-16"
+              >
+                <Compass className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+                <p className="text-xl text-muted-foreground mb-2">
+                  No tour packages found
                 </p>
-              </div>
-
-              {/* Pagination Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                {/* First Page */}
-                <Button
-                  onClick={() => goToPage(1)}
-                  disabled={adjustedCurrentPage === 1}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 w-9 p-0"
-                >
-                  <ChevronsLeft className="w-4 h-4" />
-                </Button>
-
-                {/* Previous Page */}
-                <Button
-                  onClick={() => goToPage(adjustedCurrentPage - 1)}
-                  disabled={adjustedCurrentPage === 1}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 w-9 p-0"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </Button>
-
-                {/* Page Numbers */}
-                {getPageNumbers().map((page, index) =>
-                  page === "..." ? (
-                    <span
-                      key={`ellipsis-${index}`}
-                      className="px-2 text-muted-foreground"
-                    >
-                      ...
-                    </span>
-                  ) : (
-                    <Button
-                      key={page}
-                      onClick={() => goToPage(page as number)}
-                      variant={
-                        adjustedCurrentPage === page ? "default" : "outline"
-                      }
-                      size="sm"
-                      className={`h-9 w-9 p-0 ${
-                        adjustedCurrentPage === page
-                          ? "gradient-primary text-white"
-                          : ""
-                      }`}
-                    >
-                      {page}
-                    </Button>
-                  )
-                )}
-
-                {/* Next Page */}
-                <Button
-                  onClick={() => goToPage(adjustedCurrentPage + 1)}
-                  disabled={adjustedCurrentPage === totalPages}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 w-9 p-0"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
-
-                {/* Last Page */}
-                <Button
-                  onClick={() => goToPage(totalPages)}
-                  disabled={adjustedCurrentPage === totalPages}
-                  variant="outline"
-                  size="sm"
-                  className="h-9 w-9 p-0"
-                >
-                  <ChevronsRight className="w-4 h-4" />
-                </Button>
-              </div>
-
-              {/* Mobile Page Selector */}
-              <div className="flex items-center justify-center gap-3 md:hidden">
-                <span className="text-sm text-muted-foreground">Page</span>
-                <select
-                  value={adjustedCurrentPage}
-                  onChange={(e) => goToPage(Number(e.target.value))}
-                  className="px-3 py-1 rounded-md border border-border bg-background text-foreground text-sm"
-                >
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <option key={page} value={page}>
-                        {page}
-                      </option>
-                    )
-                  )}
-                </select>
-                <span className="text-sm text-muted-foreground">
-                  of {totalPages}
-                </span>
-              </div>
-            </motion.div>
-          )}
+                <p className="text-sm text-muted-foreground">
+                  Try adjusting your filters or search query
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
